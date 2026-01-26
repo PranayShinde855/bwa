@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  height: 100vh;
+  width: 100%;
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+.footer{
+  height: 20px !important;
+  z-index: 100 !important;
+  position: fixed;
+  left: 0 !important;
+  bottom: 0;
+  width: 100 !important;
+}

@@ -1,0 +1,71 @@
+<div class="user-form-container">
+    <div class="text-center header-section">
+        <h3>Create User</h3>
+    </div>
+
+    <!-- Main Form Wrapper using Flexbox -->
+    <form class="main-form flex-row-container" [formGroup]="userForm">
+        <div class="field-section flex-col">
+            <label for="salutation">Salutation</label>
+            <input id="salutation" formControlName="salutation" class="form-control" type="text">
+        </div>
+        <div class="field-section flex-col">
+            <label for="firstName">First Name</label>
+            <input id="firstName" formControlName="firstName" class="form-control" type="text">
+        </div>
+
+        <div class="field-section flex-col">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" formControlName="lastName" class="form-control" type="text">
+        </div>
+
+        <div class="field-section flex-col">
+            <label for="email">Email</label>
+            <input id="email" formControlName="email" class="form-control" type="text">
+        </div>
+
+        <div class="field-section flex-col">
+            <label for="mobile">Mobile Number</label>
+            <div class="mobile-input-group">                
+                <select [(ngModel)]="selectedIsdCode" formControlName="isdCode" class="form-control select-isd">    
+                    <option value="" disabled>ISD Code</option>
+                    <option *ngFor="let code of isdCodes" [value]="code.isdCode">
+                        {{code.isdCode}}
+                    </option>                    
+                </select>
+                <input id="mobile" formControlName="mobileNumber" class="form-control input-mobile" type="text">
+            </div>
+        </div>
+
+        <div class="field-section flex-col">
+            <label for="role">Role</label>
+            <select id="role"  [(ngModel)]="selectedRoleId" formControlName="roleId" class="form-control">
+                <option value="0" disabled>Select Role</option>
+                <option *ngFor="let role of roles" [value]="role.id">
+                    {{role.name}}
+                </option>
+            </select>
+        </div>
+
+        <div class="image-upload-section">
+            <label class="image-label">Upload Image</label>
+            <input type="file" accept="image/*" (change)="onImageChange($event)">
+
+            <label for="image">Remove Image</label>
+            <input id="chkRemoveImage" type="checkbox" (change)="removeImage($event)" formControlName="removeImage">
+
+            <!-- Preview -->
+            <div class="image-preview" *ngIf="imagePreview">
+                <img [src]="imagePreview" alt="Preview">
+            </div>
+        </div>
+    </form>
+
+    <!-- Button Section -->
+    <div class="button-section">
+        <button class="btn btn-outline-secondary" (click)="onReset()">Reset</button>
+        <button class="btn btn-outline-primary" (click)="onSubmit()">Submit</button>
+        <!-- <button class="btn btn-outline-danger" (click)="onCancel()">Cancel</button> -->
+        <button class="btn btn-outline-danger" [routerLink]="['/users']">Cancel</button>
+    </div>
+</div>

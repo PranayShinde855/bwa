@@ -1,0 +1,21 @@
+.main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: 100%;
+    //border: 1px solid black;
+}
+
+.main {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+    border: 0.5px solid rgb(235, 232, 232);
+    border-radius: 10px;
+}
+
+.main:hover {
+    box-shadow: 10px 10px 10px rgb(194, 191, 191);
+}

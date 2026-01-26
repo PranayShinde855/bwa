@@ -1,0 +1,39 @@
+<div class="dashboard-container">
+  <div class="row mt-1">
+    <div class="col-md-6">
+      <h5>Blog Category Performance</h5>
+      <select class="w-25 form-control" [(ngModel)]="selectedCategory"
+        (ngModelChange)="getCategoryPostPerformanceData($event)">
+        <option *ngFor="let type of blogTypes" value={{type.id}}>{{type.name}}</option>
+      </select>
+      <div class="chart-container">
+        <canvas id="categoryChart">{{ chart }}</canvas>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h5>Blogs Posts Performance</h5>
+      <div class="chart-container">
+        <canvas id="performanceChart">{{ chart }}</canvas>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="blog-wrapper">
+    <div class="text-satrt">
+      <h5>Recent Posts</h5>
+    </div>
+    <div class="recent-post-container">
+      <div class="card-group" *ngFor="let post of blogs">
+        <div class="post-card">
+          <img *ngIf="post.image.length > 0" class="blogPostImage"
+            src="data:{{post.imageExtension}};base64,{{post.image}}" alt={{post.imageName}}>
+          <img *ngIf="post.image.length === 0" class="blogPostImage"
+            src="../../../../assets/common/No_image_available.svg">
+          <h4 class="card-title">{{post.title}}</h4>
+          <button class="w-75 mb-1 btn btn-outline-secondary" (click)="viewBlog(post.id)">Read More</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

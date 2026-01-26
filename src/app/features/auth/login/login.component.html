@@ -1,0 +1,42 @@
+<section class="main-wrapper">
+  <div class="wrapper">
+    <div class="main">
+      <div class="container-fluid h-custom m-3">
+        <h2 class="text-center">Login</h2>
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-md-9 col-lg-6 col-xl-5">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+              class="img-fluid" alt="Sample image">
+          </div>
+          <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 login-form">
+            <form [formGroup]="loginForm">
+              <div data-mdb-input-init class="form-outline mb-4">
+                <label class="form-label" for="userName">Email</label>
+                <mat-form-field class="w-100" appearance="outline">
+                  <input matInput formControlName="userName" placeholder="Email">
+                </mat-form-field>
+              </div>
+
+              <div data-mdb-input-init class="form-outline mb-3">
+                <label class="form-label" for="userName">Password</label>
+                <mat-form-field class="w-100" appearance="outline">
+                  <input matInput [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                    placeholder="Password">
+                  <button mat-icon-button matSuffix type="button" (click)="showPassword = !showPassword">
+                    <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+
+              <div class="text-center text-lg-start mt-4 pt-2">
+                <button type="button" [disabled]="isLoading" data-mdb-button-init data-mdb-ripple-init
+                  class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;"
+                  (click)="logIn()">Login</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

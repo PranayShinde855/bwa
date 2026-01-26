@@ -1,0 +1,68 @@
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+   margin:0;
+  padding:0;
+}
+
+.main-section {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  min-height: 100vh;
+}
+
+app-side-nav {
+  width: 20%;
+  min-height: 100vh;
+  overflow-y: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
+  overflow-y: hidden;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100vh;
+}
+
+app-footer {
+  margin: 0;
+  padding: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  position: fixed;
+}
+
+// .main {
+//   display: flex;
+//   flex: 1;
+//   overflow: hidden; /* Prevents .main from scrolling */
+// }
+
+// app-side-nav{
+//   width: 18%;
+//   height: 100vh;
+// }
+
+// .main-container {  
+//   flex: 1;
+//   //padding: 20px;
+//   min-height: 100vh;
+//   overflow-y: hidden; /* Enables vertical scroll inside main content */
+//   display: flex;
+//   flex-direction: column;
+// }
+
+// .footer {
+//   flex-shrink: 0;
+//   position: fixed;
+// }

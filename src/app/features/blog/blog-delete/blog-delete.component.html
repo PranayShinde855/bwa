@@ -1,0 +1,9 @@
+<div class="popup-container" (click)="close()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+	<h2>Are you sure, you want t delete this blog?</h2>
+    <div class="button-section">
+        <button class="w-50 btn btn-outline-primary" (click)="onConfirm()">Yes</button>
+        <button class="w-50 ms-2 btn btn-outline-danger" (click)="close()">No</button>
+    </div>
+  </div>
+</div>

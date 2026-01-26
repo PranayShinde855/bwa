@@ -1,0 +1,9 @@
+<div class="toast-container">
+    <div class="toast toast-{{ toast.severity }}" [@fadeInOut]>
+        <div class="toast-header">
+            <strong class="toast-title">{{ toast.title }}</strong>
+            <button (click)="close()">×</button>
+        </div>
+        <div class="toast-body">{{ toast.message }}</div>
+    </div>
+</div>
