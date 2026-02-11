@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
 import { BlogListComponent } from './blog-list/blog-list.component';
-import { BlogCreateComponent } from './blog-create/blog-create.component';
-import { BlogDeleteComponent } from './blog-delete/blog-delete.component';
-import { authGuard } from '../../guards/auth.guard';
+import { BlogCreateComponent } from '../blog/create-update/create-update.component';
+import { authGuard } from '../../core/guards/auth.guard';
+import { BlogDeleteComponent } from './delete-blog/delete-blog.component';
+import { ViewblogComponent } from './viewblog/viewblog.component';
 
 export const blogRoutes: Routes = [
   {
@@ -23,6 +24,11 @@ export const blogRoutes: Routes = [
   {
     path: 'delete/:id',
     component: BlogDeleteComponent,
+    canActivate: [authGuard]
+  },
+    {
+    path: 'view/:id',
+    component: ViewblogComponent,
     canActivate: [authGuard]
   }
 ];

@@ -4,16 +4,16 @@ import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { merge, tap } from 'rxjs';
-import { BlogService } from '../../../services/blog.service';
-import { BlogListModel } from '../../../models/BlogMoels/blogListModel';
-import { listRequest } from '../../../models/listRequest';
+import { BlogService } from '../../../core/services/blog.service';
+import { BlogListModel } from '../../../sharedModule/models/BlogMoels/blogListModel';
+import { listRequest } from '../../../sharedModule/models/listRequest';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from "@angular/router";
-import { BlogDeleteComponent } from "../blog-delete/blog-delete.component";
+import { BlogDeleteComponent } from "../delete-blog/delete-blog.component";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { BlogDeleteRequest } from '../../../models/BlogMoels/BlogDeleteRequest';
-import { CheckPermissionsService } from '../../../services/check-permissions.service';
+import { BlogDeleteRequest } from '../../../sharedModule/models/BlogMoels/BlogDeleteRequest';
+import { CheckPermissionsService } from '../../../core/services/check-permissions.service';
 
 
 @Component({
@@ -47,7 +47,7 @@ export class BlogListComponent implements AfterViewInit {
     , private router: Router
     , public dialog: MatDialog
     , private checkPermissionsService: CheckPermissionsService) {
-    this.checkPermissionsService.checkBlogModulePermission();
+    // this.checkPermissionsService.checkBlogModulePermission();
     this.getData();
   }
   ngAfterViewInit(): void {
@@ -72,7 +72,7 @@ export class BlogListComponent implements AfterViewInit {
   }
 
   getPginatatedData() {
-    debugger
+    
     console.log(this.searchText);
     let request: listRequest = {
       globalSearch: this.searchText,
@@ -110,9 +110,9 @@ export class BlogListComponent implements AfterViewInit {
     this.blogService.get(request).subscribe({
       next: (res) => {
         this.dataSource.data = res.data.list as BlogListModel[];
-        if (this.paginator) {
+        // if (this.paginator) {
           this.paginator.length = res.data.totalCount;
-        }
+        // }        
       },
       error: (error) => {
         console.log(error);
@@ -143,6 +143,7 @@ export class BlogListComponent implements AfterViewInit {
           next: (res) => {
             window.alert(res.message);
             this.getData();
+            window.location.reload();
           },
           error: (error) => {
             window.alert(error.error);

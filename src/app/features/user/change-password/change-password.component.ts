@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { passwordValidator } from '../../../validators/password.validator';
-import { UserService } from '../../../services/user.service';
-import { SharedMaterialModule } from '../../../modules/shared-material/shared-material.module';
+import { passwordValidator } from '../../../sharedModule/validators/password.validator';
+import { UserService } from '../../../core/services/user.service';
+import { SharedMaterialModule } from '../../../sharedModule/shared-material.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -50,7 +50,7 @@ export class ChangePasswordComponent {
       "newPassword": this.changePasswordForm.value['newPassword'],
       "confirmPassword": this.changePasswordForm.value['confirmPassword'],
     };
-    debugger
+    
 
     if (changePasswordRequest.oldPassword == changePasswordRequest.newPassword) {
       window.alert("Old password cannot be new password.")
@@ -61,7 +61,7 @@ export class ChangePasswordComponent {
           window.alert(res.message)
         },
         error: (err) => {
-          debugger
+    
           window.alert(err.message)
         }
       }

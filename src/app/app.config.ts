@@ -4,8 +4,8 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
-import { authInterceptor } from './interceptor/auth.interceptor';
-import { baseURLInterceptor } from './interceptor/base-url.interceptor';
+import { baseURLInterceptor } from './core/interceptors/reverse.interceptor';
+import { authInterceptor } from './core/interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [    

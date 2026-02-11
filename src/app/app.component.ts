@@ -3,18 +3,16 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 //import { MenuComponent } from './Shared/menu/menu.component';
 import { isPlatformBrowser } from '@angular/common';
-import { SideNavComponent } from "./Shared/side-nav/side-nav.component";
-import { ToasterComponent } from "./Shared/toaster/toaster.component";
-import { FooterComponent } from "./Shared/footer/footer.component";
-import { BehaviorSubject } from 'rxjs';
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../app/core/services/auth.service';
+import { SidebarComponent } from './sharedModule/components/sidebar/sidebar.component';
+import { FooterComponent } from './sharedModule/components/footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     CommonModule,
-    SideNavComponent,
+    SidebarComponent,
     FooterComponent,
     RouterOutlet
   ],
@@ -26,16 +24,16 @@ export class AppComponent implements OnInit {
   title = 'BWA';
   constructor(private authService: AuthService
     , @Inject(PLATFORM_ID) private platformId: Object) {
-  debugger
     this.isLoggedIn$ = this.authService.loggedIn$;
   }
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      let token = window.localStorage.getItem('token');
+      let token = window.sessionStorage.getItem('token');
+
       if (token != undefined && token?.length > 0)
         this.authService.setLoggedInStatus(true);
       else
-        this.authService.setLoggedInStatus(true);
+        this.authService.setLoggedInStatus(false);
     }
     else
       this.authService.setLoggedInStatus(true);

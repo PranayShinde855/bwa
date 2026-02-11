@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './guards/auth.guard';
+import { authGuard } from './core/guards/auth.guard';
+import { DashboardComponent } from './features/dashboard/dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -10,8 +11,7 @@ export const routes: Routes = [
   {
     path: 'login',
     loadChildren: () =>
-      import('./features/auth/auth.routes').then((m) => m.authRoutes),
-    canActivate: [authGuard]
+      import('../app/features/auth/auth.module').then((m) => m.AuthModule)
 
   },
   {
@@ -28,8 +28,12 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: () =>
-      import('./features/dashboard/dashboard.routes').then((m) => m.dashboardRoutes),
+    component: DashboardComponent,
     canActivate: [authGuard]
+  },
+  {
+    // This is public API
+    path: 'blog-list',
+    loadChildren: ()=> import('./features/public/public.module').then((m)=> m.PublicModule)
   }
 ];

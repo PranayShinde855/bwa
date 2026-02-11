@@ -4,18 +4,18 @@ import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { merge } from 'rxjs';
-import { listRequest } from '../../../models/listRequest';
+import { listRequest } from '../../../sharedModule/models/listRequest';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from "@angular/router";
-import { UserListModel } from '../../../models/UserModels/userListModel';
-import { UserService } from '../../../services/user.service';
+import { UserListModel } from '../../../sharedModule/models/UserModels/userListModel';
+import { UserService } from '../../../core/services/user.service';
 import { MatDialog } from '@angular/material/dialog';
-import { UserDeleteComponent } from '../user-delete/user-delete.component';
-import { deleteUserRequest } from '../../../models/UserModels/deleteUserRequest';
-import { GetRoles } from '../../../models/UserModels/GetRoles';
-import { ActivateDeactivateUserComponent } from '../activate-deactivate-user/activate-deactivate-user.component';
-import { CheckPermissionsService } from '../../../services/check-permissions.service';
+import { DeleteUserComponent } from '../delete-user/delete-user.component';
+import { deleteUserRequest } from '../../../sharedModule/models/UserModels/deleteUserRequest';
+import { GetRoles } from '../../../sharedModule/models/UserModels/GetRoles';
+import { ActivateDeactivateUserComponent } from '..//activate-deactivate-user-component/activate-deactivate-user-component';
+import { CheckPermissionsService } from '../../../core/services/check-permissions.service';
 
 
 @Component({
@@ -119,7 +119,7 @@ export class UserListComponent {
     if (id <= 0)
       window.alert("Kindly select the user.");
 
-    let dialogRef = this.matDialog.open(UserDeleteComponent,
+    let dialogRef = this.matDialog.open(DeleteUserComponent,
       {
         'width': '50%',
         data: ({ userId: id })
@@ -159,7 +159,7 @@ export class UserListComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result.isDeactivate) {
         let userDeactivateRequest: any = {
-          useId: id
+          userId: id
         };
 
         this.userService.deactivateUser(userDeactivateRequest).subscribe({
@@ -189,7 +189,7 @@ export class UserListComponent {
     dialogRef.afterClosed().subscribe((result) => {
       if (result.isActivate) {
         let userActivateRequest: any = {
-          useId: id
+          userId: id
         };
 
         this.userService.deactivateUser(userActivateRequest).subscribe({

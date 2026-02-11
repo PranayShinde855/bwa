@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
+import { BlogCreateComponent } from '../blog/create-update/create-update.component';
+import { authGuard } from '../../core/guards/auth.guard';
 import { UserListComponent } from './user-list/user-list.component';
-import { UserCreateComponent } from './user-create/user-create.component';
-import { authGuard } from '../../guards/auth.guard';
+import { CreateUpdateComponent } from './create-update/create-update.component';
+import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 
 export const userRoutes: Routes = [
@@ -12,12 +14,17 @@ export const userRoutes: Routes = [
   },
   {
     path: 'create',
-    component: UserCreateComponent,
+    component: CreateUpdateComponent,
     canActivate: [authGuard]
   },
   {
     path: 'edit/:id',
-    component: UserCreateComponent,
+    component: CreateUpdateComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'delete/:id',
+    component: DeleteUserComponent,
     canActivate: [authGuard]
   },
   {
@@ -26,3 +33,5 @@ export const userRoutes: Routes = [
     canActivate: [authGuard]
   }
 ];
+
+
