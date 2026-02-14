@@ -22,13 +22,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       if (error.status === 500 || error.status === 400) {
         errorMsg = error.message;
       } else if (error.status === 401) {
-        authService.logout();
         window.sessionStorage.clear();
       }
 
       window.alert(errorMsg);
       
-      // Re-throw the error to propagate it to the calling code
       return throwError(() => new Error(errorMsg));
     })
   );

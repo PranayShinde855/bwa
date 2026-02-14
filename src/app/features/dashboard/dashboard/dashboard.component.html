@@ -26,6 +26,7 @@
       <h5>Recent Posts</h5>
     </div>
     <div class="recent-post-container">
+      @if(blogs != undefined && blogs.length > 0){
       <div class="card-group" *ngFor="let post of blogs">
         <div class="post-card">
           <img *ngIf="post.image.length > 0" class="blogPostImage"
@@ -35,6 +36,12 @@
           <button class="w-75 mb-1 btn btn-outline-secondary" (click)="readMore(post.id)">Read More</button>
         </div>
       </div>
+      }
+      @else{
+      <div class="card-group">
+        <div class="text-center">No Recent Post</div>
+      </div>
+      }
     </div>
   </div>
 </div>
@@ -51,12 +58,14 @@
 
       <div class="user-container-fluid mb-4">
         <label for="">Select category</label>
-        <select class="user-form-select w-50" onchange="getBlogs()" [(ngModel)]="selectedCategory">
+        <select class="user-form-select w-50" (change)="getUserBlogs()" [(ngModel)]="selectedCategory">
+          <option value="0" [defaultSelected]="0">Select</option>
           <option *ngFor="let type of blogTypes" value={{type.id}}>{{type.name}}</option>
         </select>
       </div>
       <div class="user-cards-section">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 cards-bottom">
+          @if(blogs != undefined && blogs.length> 0){
           <div *ngFor="let blog of blogs" class="col">
             <div class="user-card h-100 shadow-sm border-0">
               <div class="user-card-body d-flex flex-column align-items-center">
@@ -88,7 +97,10 @@
               </div>
             </div>
           </div>
-
+        }
+        @else {
+          <div class="row">No blogs available</div>
+        }
         </div>
       </div>
     </div>

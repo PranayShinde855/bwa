@@ -21,10 +21,7 @@ export class BlogsComponent {
   blogs: DashboardBlogList[] = [];
   constructor(private dashboardService: DashboardService
     , private blogTypeService: BlogtypeService
-    , private router: Router
-  , private checkPermissionsService: CheckPermissionsService) {
-    
-    this.checkPermissionsService.checkEDitorAndUserDashboardPermission();
+    , private router: Router) {    
     this.getBlogs();
     this.getCategory();
   }

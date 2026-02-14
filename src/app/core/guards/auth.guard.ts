@@ -6,7 +6,6 @@ import { map, take } from 'rxjs';
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const authService = inject(AuthService);
-
   return authService.loggedIn$.pipe(
     take(1),
     map(isLoggedIn => {

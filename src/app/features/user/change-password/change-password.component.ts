@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
@@ -35,13 +36,21 @@ export class ChangePasswordComponent {
   showConfirmPassword: boolean = false;
   constructor(private fb: FormBuilder
     , private userService: UserService
+    , private router: Router
   ) {
     this.changePasswordForm = this.fb.group({
       oldPassword: ['', Validators.required],
       newPassword: ['', [Validators.required, passwordValidator()]],
       confirmPassword: ['', [Validators.required, passwordValidator()]]
     });
+  }
 
+  initialize() {
+    this.changePasswordForm = this.fb.group({
+      oldPassword: ['', Validators.required],
+      newPassword: ['', [Validators.required, passwordValidator()]],
+      confirmPassword: ['', [Validators.required, passwordValidator()]]
+    });
   }
 
   submit() {
@@ -50,7 +59,7 @@ export class ChangePasswordComponent {
       "newPassword": this.changePasswordForm.value['newPassword'],
       "confirmPassword": this.changePasswordForm.value['confirmPassword'],
     };
-    
+
 
     if (changePasswordRequest.oldPassword == changePasswordRequest.newPassword) {
       window.alert("Old password cannot be new password.")
@@ -59,9 +68,11 @@ export class ChangePasswordComponent {
       this.userService.changePassword(changePasswordRequest).subscribe({
         next: (res) => {
           window.alert(res.message)
+          this.initialize();
+          this.router.navigate(['/dashboard']);
         },
         error: (err) => {
-    
+
           window.alert(err.message)
         }
       }

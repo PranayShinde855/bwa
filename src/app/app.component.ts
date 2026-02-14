@@ -6,6 +6,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../app/core/services/auth.service';
 import { SidebarComponent } from './sharedModule/components/sidebar/sidebar.component';
 import { FooterComponent } from './sharedModule/components/footer/footer.component';
+import { SharedMaterialModule } from './sharedModule/shared-material.module';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ import { FooterComponent } from './sharedModule/components/footer/footer.compone
     CommonModule,
     SidebarComponent,
     FooterComponent,
-    RouterOutlet
+    RouterOutlet,
+    SharedMaterialModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']

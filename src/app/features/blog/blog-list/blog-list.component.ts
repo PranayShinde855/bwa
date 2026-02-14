@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild, viewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, viewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -11,22 +11,23 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterLink } from "@angular/router";
 import { BlogDeleteComponent } from "../delete-blog/delete-blog.component";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { MatDialog } from "@angular/material/dialog";
 import { BlogDeleteRequest } from '../../../sharedModule/models/BlogMoels/BlogDeleteRequest';
-import { CheckPermissionsService } from '../../../core/services/check-permissions.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @Component({
   selector: 'app-blog-list',
-  standalone: true, // FIX 1: Add standalone flag
+  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MatTableModule,
-    // MatInputModule,
-    //MatFormFieldModule, // FIX 2: Use the Module
-    MatPaginatorModule, // FIX 2: Use the Module
-    MatSortModule, // FIX 2: Use the Module
+    MatInputModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSortModule,
     MatButtonModule,
     RouterLink,
     BlogDeleteComponent
@@ -34,7 +35,7 @@ import { CheckPermissionsService } from '../../../core/services/check-permission
   templateUrl: './blog-list.component.html',
   styleUrl: './blog-list.component.scss'
 })
-export class BlogListComponent implements AfterViewInit {
+export class BlogListComponent implements OnInit, AfterViewInit {
   showTable: boolean = true;
   isPopupVisible: boolean = false;
   searchText = "";
@@ -45,12 +46,13 @@ export class BlogListComponent implements AfterViewInit {
 
   constructor(private blogService: BlogService
     , private router: Router
-    , public dialog: MatDialog
-    , private checkPermissionsService: CheckPermissionsService) {
-    // this.checkPermissionsService.checkBlogModulePermission();
+    , public dialog: MatDialog) {
+  }
+  ngOnInit(): void {
     this.getData();
   }
   ngAfterViewInit(): void {
+    debugger
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     merge(this.paginator.page, this.sort.sortChange).pipe(
@@ -72,7 +74,7 @@ export class BlogListComponent implements AfterViewInit {
   }
 
   getPginatatedData() {
-    
+
     console.log(this.searchText);
     let request: listRequest = {
       globalSearch: this.searchText,
@@ -111,7 +113,7 @@ export class BlogListComponent implements AfterViewInit {
       next: (res) => {
         this.dataSource.data = res.data.list as BlogListModel[];
         // if (this.paginator) {
-          this.paginator.length = res.data.totalCount;
+        this.paginator.length = res.data.totalCount;
         // }        
       },
       error: (error) => {

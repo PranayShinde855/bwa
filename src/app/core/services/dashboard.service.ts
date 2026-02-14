@@ -15,23 +15,26 @@ export class DashboardService {
     return this.httpClient.post(`Dashboard/GetCountAsync`, '');
   }
 
-   getBlogs(): Observable<any> {
-    return this.httpClient.post(`Dashboard/GetBlogAsync`, '');
-  }
-
-   getBlogsByCategory(request:any): Observable<any> {
+  getBlogs(): Observable<any> {
+    let request = {
+      id : 0
+    };
     return this.httpClient.post(`Dashboard/GetBlogAsync`, request);
   }
 
-   getPostPerformanceData(reuest:any): Observable<any> {
+  getBlogsByCategory(request: any): Observable<any> {
+    return this.httpClient.post(`Dashboard/GetBlogAsync`, request);
+  }
+
+  getPostPerformanceData(reuest: any): Observable<any> {
     return this.httpClient.post(`Dashboard/GetGraphBlogPostPerformanceAsync`, reuest);
   }
-  
-  getGraphCategoryPerformance(reuest:any): Observable<any> {
+
+  getGraphCategoryPerformance(reuest: any): Observable<any> {
     return this.httpClient.post(`Dashboard/GetGraphCategoryPerformanceAsync`, reuest);
   }
-  
-  GetUserBlogByCategoryIdAsync(reuest:any): Observable<any> {
+
+  GetUserBlogByCategoryIdAsync(reuest: any): Observable<any> {
     return this.httpClient.post(`Blog/GetUserBlogByCategoryIdAsync`, reuest);
   }
 

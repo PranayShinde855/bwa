@@ -3,7 +3,7 @@ import { SharedMaterialModule } from '../../../sharedModule/modules/shared-mater
 import Chart from 'chart.js/auto';
 //import { RouterLink } from '@angular/router';
 import { error } from 'node:console';
-import { isPlatformBrowser, NgFor } from '@angular/common';
+import { CommonModule, isPlatformBrowser, NgFor } from '@angular/common';
 import { BlogtypeService } from '../../../core/services/blogtype.service';
 import { DashboardService } from '../../../core/services/dashboard.service';
 import { CheckPermissionsService } from '../../../core/services/check-permissions.service';
@@ -18,7 +18,7 @@ import { TruncatePipe } from '../../../sharedModule/pipes/truncate';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [SharedMaterialModule, FormsModule, NgFor, TruncatePipe],
+  imports: [SharedMaterialModule, FormsModule, NgFor, TruncatePipe, CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -43,11 +43,7 @@ export class DashboardComponent {
   constructor(private dashboardService: DashboardService
     , private blogTypeService: BlogtypeService
     , private router: Router
-    , @Inject(PLATFORM_ID) private platformId: Object
-    , private checkPermissionsService: CheckPermissionsService
-  ) {
-    this.checkPermissionsService.checkAdminDashboardPermission();
-    this.checkPermissionsService.checkEDitorAndUserDashboardPermission();
+    , @Inject(PLATFORM_ID) private platformId: Object  ) {
     this.getBlogs();
     this.getCategory();
   }
@@ -73,9 +69,18 @@ export class DashboardComponent {
   }
 
 
-  getBlogs() {
+  getBlogs() {    
     this.dashboardService.getBlogs().subscribe((res) => {
-      this.blogs = res.data as DashboardBlogList[];
+      this.blogs = res.data as DashboardBlogList[];      
+    });
+  }
+
+   getUserBlogs() {
+    let request = {
+      id: this.selectedCategory
+    };   
+    this.dashboardService.getBlogsByCategory(request).subscribe((res) => {
+      this.blogs = res.data as DashboardBlogList[];      
     });
   }
 
@@ -149,7 +154,6 @@ export class DashboardComponent {
 
     if (this.categoryChart) { this.categoryChart.destroy(); }
 
-debugger
     const labels = this.dashboardPostPerformanceData.data.map(d => d.data);
     const values = this.dashboardPostPerformanceData.data.map(item => +item.value);
 
