@@ -1,59 +1,20 @@
-# Bwa
+Frontend Architecture (Angular 19)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.19.
+User an create blogs and edits of their own where as the admin can create blog and perform CRUD on it.
+There are only two modules blogs and user. Except that the user can change password as per thire need.
 
-## Development server
-
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The Angular frontend is modular, leveraging lazy loading for performance optimization across the two main modules: Blogs and Users.
+•	Authentication & Authorization: JWT is stored securely, and Guards protect routes based on user roles. 
+•	Interceptors: Handle JWT injection in HTTP headers and response errors globally.
+•	Services: Encapsulate API logic for blogs and users, promoting reusability. 
+•	Pipes & Directives: Used for data formatting and DOM manipulation. 
+•	Lazy Loading: Modules are loaded on demand to improve initial load time.
+Role-Based Access Control
+•	Admin:
+o	Full CRUD access to all blogs.
+o	Can manage users (view, edit, delete).
+•	User:
+o	Can create and edit only their own blogs.
+o	Can change their password.
+o	Can view all blogs. 
+Access to components and API endpoints is restricted using role checks on both frontend (Angular Guards) and backend (Authorization attributes). 
